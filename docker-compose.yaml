@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+
+  lambda:
+    build:
+      context: .
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+#    volumes:
+#      - ./:/home/app/
+    ports:
+      - "9000:8080"
+    networks:
+      - lambda_network
+
+networks: # <-- and here
+  lambda_network:
+    driver: bridge
